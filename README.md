@@ -69,7 +69,9 @@ If you have Antigravity installed and logged in, the proxy will automatically ex
 
 **Option B: Add Google Accounts via OAuth (Recommended for Multi-Account)**
 
-Add one or more Google accounts for load balancing:
+Add one or more Google accounts for load balancing.
+
+#### Desktop/Laptop (with browser)
 
 ```bash
 # If installed via npm
@@ -84,7 +86,22 @@ npm run accounts:add
 
 This opens your browser for Google OAuth. Sign in and authorize access. Repeat for multiple accounts.
 
-Manage accounts:
+#### Headless Server (Docker, SSH, no desktop)
+
+```bash
+# If installed via npm
+antigravity-claude-proxy accounts add --no-browser
+
+# If using npx
+npx antigravity-claude-proxy accounts add -- --no-browser
+
+# If cloned locally
+npm run accounts:add -- --no-browser
+```
+
+This displays an OAuth URL you can open on another device (phone/laptop). After signing in, copy the redirect URL or authorization code and paste it back into the terminal.
+
+#### Manage accounts
 
 ```bash
 # List all accounts
@@ -144,11 +161,13 @@ Add this configuration:
     "ANTHROPIC_MODEL": "claude-opus-4-5-thinking",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-5-thinking",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-5-thinking",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-sonnet-4-5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "gemini-2.5-flash-lite",
     "CLAUDE_CODE_SUBAGENT_MODEL": "claude-sonnet-4-5-thinking"
   }
 }
 ```
+
+(Please use **gemini-2.5-flash-lite** as the default haiku model, even if others are claude, as claude code makes several calls via the haiku model for background tasks. If you use claude model for it, you may use you claude usage sooner)
 
 Or to use Gemini models:
 
@@ -383,4 +402,4 @@ MIT
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=badri-s2001/antigravity-claude-proxy&type=date&legend=top-left&cache-control=no-cache)](https://www.star-history.com/#badri-s2001/antigravity-claude-proxy&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=badrisnarayanan/antigravity-claude-proxy&type=date&legend=top-left&cache-control=no-cache)](https://www.star-history.com/#badrisnarayanan/antigravity-claude-proxy&type=date&legend=top-left)

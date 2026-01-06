@@ -14,7 +14,9 @@ const tests = [
     { name: 'Multi-turn Tools (Streaming)', file: 'test-multiturn-thinking-tools-streaming.cjs' },
     { name: 'Interleaved Thinking', file: 'test-interleaved-thinking.cjs' },
     { name: 'Image Support', file: 'test-images.cjs' },
-    { name: 'Prompt Caching', file: 'test-caching-streaming.cjs' }
+    { name: 'Prompt Caching', file: 'test-caching-streaming.cjs' },
+    { name: 'Cross-Model Thinking', file: 'test-cross-model-thinking.cjs' },
+    { name: 'OAuth No-Browser Mode', file: 'test-oauth-no-browser.cjs' }
 ];
 
 async function runTest(test) {

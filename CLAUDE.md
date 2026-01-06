@@ -29,6 +29,7 @@ npm run dev
 # Account management
 npm run accounts         # Interactive account management
 npm run accounts:add     # Add a new Google account via OAuth
+npm run accounts:add -- --no-browser  # Add account on headless server (manual code input)
 npm run accounts:list    # List configured accounts
 npm run accounts:verify  # Verify account tokens are valid
 
@@ -43,6 +44,7 @@ npm run test:interleaved   # Interleaved thinking
 npm run test:images        # Image processing
 npm run test:caching       # Prompt caching
 npm run test:crossmodel    # Cross-model thinking signatures
+npm run test:oauth         # OAuth no-browser mode
 ```
 
 ## Architecture
@@ -99,7 +101,8 @@ src/
 │
 └── utils/                      # Utilities
     ├── helpers.js              # formatDuration, sleep
-    └── logger.js               # Structured logging
+    ├── logger.js               # Structured logging
+    └── native-module-helper.js # Auto-rebuild for native modules
 ```
 
 **Key Modules:**
@@ -107,7 +110,7 @@ src/
 - **src/server.js**: Express server exposing Anthropic-compatible endpoints (`/v1/messages`, `/v1/models`, `/health`, `/account-limits`)
 - **src/cloudcode/**: Cloud Code API client with retry/failover logic, streaming and non-streaming support
 - **src/account-manager/**: Multi-account pool with sticky selection, rate limit handling, and automatic cooldown
-- **src/auth/**: Authentication including Google OAuth, token extraction, and database access
+- **src/auth/**: Authentication including Google OAuth, token extraction, database access, and auto-rebuild of native modules
 - **src/format/**: Format conversion between Anthropic and Google Generative AI formats
 - **src/constants.js**: API endpoints, model mappings, fallback config, OAuth config, and all configuration values
 - **src/fallback-config.js**: Model fallback mappings (`getFallbackModel()`, `hasFallback()`)
@@ -141,6 +144,13 @@ src/
 - Thinking recovery (`closeToolLoopForThinking()`) injects synthetic messages to close interrupted tool loops
 - For Gemini targets: strict validation - drops unknown or mismatched signatures
 - For Claude targets: lenient - lets Claude validate its own signatures
+
+**Native Module Auto-Rebuild:**
+- When Node.js is updated, native modules like `better-sqlite3` may become incompatible
+- The proxy automatically detects `NODE_MODULE_VERSION` mismatch errors
+- On detection, it attempts to rebuild the module using `npm rebuild`
+- If rebuild succeeds, the module is reloaded; if reload fails, a server restart is required
+- Implementation in `src/utils/native-module-helper.js` and lazy loading in `src/auth/database.js`
 
 ## Testing Notes
 
