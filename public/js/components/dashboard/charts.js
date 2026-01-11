@@ -178,13 +178,17 @@ window.DashboardCharts.updateCharts = function (component) {
     // Calculate average health from quotaInfo (each entry has { pct })
     // Health = average of all account quotas for this model
     const quotaInfo = row.quotaInfo || [];
+    let avgHealth = 0;
+
     if (quotaInfo.length > 0) {
-      const avgHealth = quotaInfo.reduce((sum, q) => sum + (q.pct || 0), 0) / quotaInfo.length;
-      healthByFamily[family].total++;
-      healthByFamily[family].weighted += avgHealth;
-      totalHealthSum += avgHealth;
-      totalModelCount++;
+      avgHealth = quotaInfo.reduce((sum, q) => sum + (q.pct || 0), 0) / quotaInfo.length;
     }
+    // If quotaInfo is empty, avgHealth remains 0 (depleted/unknown)
+
+    healthByFamily[family].total++;
+    healthByFamily[family].weighted += avgHealth;
+    totalHealthSum += avgHealth;
+    totalModelCount++;
   });
 
   // Update overall health for dashboard display
@@ -193,9 +197,9 @@ window.DashboardCharts.updateCharts = function (component) {
     : 0;
 
   const familyColors = {
-    claude: getThemeColor("--color-neon-purple"),
-    gemini: getThemeColor("--color-neon-green"),
-    unknown: getThemeColor("--color-neon-cyan"),
+    claude: getThemeColor("--color-neon-purple") || "#a855f7",
+    gemini: getThemeColor("--color-neon-green") || "#22c55e",
+    unknown: getThemeColor("--color-neon-cyan") || "#06b6d4",
   };
 
   const data = [];
@@ -240,7 +244,9 @@ window.DashboardCharts.updateCharts = function (component) {
 
     // Inactive segment
     data.push(inactiveVal);
-    colors.push(window.DashboardCharts.hexToRgba(familyColor, 0.1));
+    // Use higher opacity (0.6) to ensure the ring color matches the legend more closely
+    // while still differentiating "depleted" from "active" (1.0 opacity)
+    colors.push(window.DashboardCharts.hexToRgba(familyColor, 0.6));
     labels.push(depletedLabel);
   });
 

@@ -227,7 +227,10 @@ document.addEventListener('alpine:init', () => {
                     quotaInfo.push({ pct });
                 });
 
-                if (quotaInfo.length === 0) return;
+                if (quotaInfo.length === 0) {
+                    // Include model even if no quota info is available (treat as 0% or unknown)
+                    // This ensures the family appears in the charts
+                }
 
                 rows.push({ modelId, family, quotaInfo });
             });
