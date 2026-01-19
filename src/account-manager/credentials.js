@@ -220,17 +220,13 @@ export async function discoverProject(token, projectId = undefined) {
     let gotSuccessfulResponse = false;
     let loadCodeAssistData = null;
 
-    // Build metadata matching reference: only set duetProject if projectId is truthy
-    // For loadCodeAssist, reference passes projectId ?? fallbackProjectId
-    // Reference: opencode-antigravity-auth/src/plugin/project.ts buildMetadata()
-    const projectIdForLoad = projectId ?? DEFAULT_PROJECT_ID;
     const metadata = {
         ideType: 'IDE_UNSPECIFIED',
         platform: 'PLATFORM_UNSPECIFIED',
         pluginType: 'GEMINI'
     };
-    if (projectIdForLoad) {
-        metadata.duetProject = projectIdForLoad;
+    if (projectId) {
+        metadata.duetProject = projectId;
     }
 
     for (const endpoint of LOAD_CODE_ASSIST_ENDPOINTS) {
@@ -282,23 +278,11 @@ export async function discoverProject(token, projectId = undefined) {
 
     // If we got a successful response but no project, try onboarding
     if (gotSuccessfulResponse && loadCodeAssistData) {
-        // Priority: paidTier > currentTier > allowedTiers (consistent with model-api.js)
-        let tierId = null;
-        let tierSource = null;
-
-        if (loadCodeAssistData.paidTier?.id) {
-            tierId = loadCodeAssistData.paidTier.id;
-            tierSource = 'paidTier';
-        } else if (loadCodeAssistData.currentTier?.id) {
-            tierId = loadCodeAssistData.currentTier.id;
-            tierSource = 'currentTier';
-        } else {
-            tierId = getDefaultTierId(loadCodeAssistData.allowedTiers);
-            tierSource = 'allowedTiers';
-        }
-
-        tierId = tierId || 'free-tier';
-        logger.info(`[AccountManager] Onboarding user with tier: ${tierId} (source: ${tierSource})`);
+        // Only use allowedTiers for onboarding (matching opencode-antigravity-auth and oauth.js)
+        // Note: paidTier (g1-pro-tier, g1-ultra-tier) is NOT valid for onboardUser API
+        // The paidTier is used for subscription detection only, not for onboarding
+        const tierId = getDefaultTierId(loadCodeAssistData.allowedTiers) || 'free-tier';
+        logger.info(`[AccountManager] Onboarding user with tier: ${tierId}`);
 
         // Pass projectId for metadata.duetProject (without fallback, matching reference)
         // Reference: opencode-antigravity-auth passes parts.projectId (not fallback) to onboardManagedProject
