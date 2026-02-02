@@ -41,7 +41,7 @@
 
           src = ./.;
 
-          npmDepsHash = "sha256-uG54p0YSdLiNV8uuQXLzaBk7JDxjv9zFborlTqUIiKg=";
+          npmDepsHash = "sha256-km3LBLwkjkqYyN/SlN6EKA0gSOapjRs7yjUoEU7Xcog=";
 
           # Required for better-sqlite3 native module compilation
           nativeBuildInputs = with pkgs; [
