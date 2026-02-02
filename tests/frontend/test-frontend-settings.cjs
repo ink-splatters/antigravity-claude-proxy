@@ -2,7 +2,7 @@
  * Frontend Test Suite - Settings Page
  * Tests the settings and Claude configuration components
  *
- * Run: node tests/test-frontend-settings.cjs
+ * Run: bun tests/test-frontend-settings.cjs
  */
 
 const http = require('http');

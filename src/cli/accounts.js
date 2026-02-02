@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
 /**
  * Account Management CLI
@@ -7,10 +7,10 @@
  * for the Antigravity Claude Proxy.
  *
  * Usage:
- *   node src/cli/accounts.js          # Interactive mode
- *   node src/cli/accounts.js add      # Add new account(s)
- *   node src/cli/accounts.js list     # List all accounts
- *   node src/cli/accounts.js clear    # Remove all accounts
+ *   bun src/cli/accounts.js          # Interactive mode
+ *   bun src/cli/accounts.js add      # Add new account(s)
+ *   bun src/cli/accounts.js list     # List all accounts
+ *   bun src/cli/accounts.js clear    # Remove all accounts
  */
 
 import { createInterface } from 'readline/promises';
@@ -484,11 +484,11 @@ async function main() {
                 break;
             case 'help':
                 console.log('\nUsage:');
-                console.log('  node src/cli/accounts.js add     Add new account(s)');
-                console.log('  node src/cli/accounts.js list    List all accounts');
-                console.log('  node src/cli/accounts.js verify  Verify account tokens');
-                console.log('  node src/cli/accounts.js clear   Remove all accounts');
-                console.log('  node src/cli/accounts.js help    Show this help');
+                console.log('  bun src/cli/accounts.js add     Add new account(s)');
+                console.log('  bun src/cli/accounts.js list    List all accounts');
+                console.log('  bun src/cli/accounts.js verify  Verify account tokens');
+                console.log('  bun src/cli/accounts.js clear   Remove all accounts');
+                console.log('  bun src/cli/accounts.js help    Show this help');
                 console.log('\nOptions:');
                 console.log('  --no-browser    Manual authorization code input (for headless servers)');
                 break;

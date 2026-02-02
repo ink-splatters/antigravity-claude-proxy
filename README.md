@@ -26,21 +26,21 @@ A proxy server that exposes an **Anthropic-compatible API** backed by **Antigrav
 
 ## Prerequisites
 
-- **Node.js** 18 or later
+- **[bun](https://bun.com)**
 - **Antigravity** installed (for single-account mode) OR Google account(s) for multi-account mode
 
 ---
 
 ## Installation
 
-### Option 1: npm (Recommended)
+### Option 1: bun (Recommended)
 
 ```bash
-# Run directly with npx (no install needed)
-npx antigravity-claude-proxy@latest start
+# Run directly with bnx (no install needed)
+bnx antigravity-claude-proxy@latest start
 
 # Or install globally
-npm install -g antigravity-claude-proxy@latest
+bun install -g antigravity-claude-proxy@latest
 antigravity-claude-proxy start
 ```
 
@@ -49,8 +49,8 @@ antigravity-claude-proxy start
 ```bash
 git clone https://github.com/badri-s2001/antigravity-claude-proxy.git
 cd antigravity-claude-proxy
-npm install
-npm start
+bun install
+bun start
 ```
 
 ---
@@ -60,14 +60,14 @@ npm start
 ### 1. Start the Proxy Server
 
 ```bash
-# If installed via npm
+# If installed via bun install -g
 antigravity-claude-proxy start
 
-# If using npx
-npx antigravity-claude-proxy@latest start
+# Run directly with bnx
+bnx antigravity-claude-proxy@latest start
 
-# If cloned locally
-npm start
+# Or the same, if cloned locally
+bun start
 ```
 
 The server runs on `http://localhost:8080` by default.

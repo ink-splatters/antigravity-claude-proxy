@@ -2,7 +2,7 @@
  * Frontend Test Suite - Logs Page
  * Tests the logs viewer component functionality
  *
- * Run: node tests/test-frontend-logs.cjs
+ * Run: bun tests/test-frontend-logs.cjs
  */
 
 const http = require('http');

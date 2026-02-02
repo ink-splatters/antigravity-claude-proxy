@@ -1,8 +1,8 @@
 /**
  * Stress Test (Streaming) - Send multiple concurrent streaming requests to test rate limit handling
  *
- * Usage: node tests/stress-test-streaming.cjs [count] [model]
- * Example: node tests/stress-test-streaming.cjs 10 gemini-3-flash
+ * Usage: bun tests/stress-test-streaming.cjs [count] [model]
+ * Example: bun tests/stress-test-streaming.cjs 10 gemini-3-flash
  */
 
 const BASE_URL = process.env.ANTHROPIC_BASE_URL || 'http://localhost:8080';

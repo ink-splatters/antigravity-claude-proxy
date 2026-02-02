@@ -1,23 +1,15 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { readFileSync } from 'fs';
+// Import version at build time so it's embedded in the compiled binary
+import packageJson from '../package.json';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Read package.json for version
-const packageJson = JSON.parse(
-  readFileSync(join(__dirname, '..', 'package.json'), 'utf-8')
-);
-
+const VERSION = packageJson.version;
 const args = process.argv.slice(2);
 const command = args[0];
 
 function showHelp() {
   console.log(`
-antigravity-claude-proxy v${packageJson.version}
+antigravity-claude-proxy v${VERSION}
 
 Proxy server for using Antigravity's Claude models with Claude Code CLI.
 
@@ -57,11 +49,10 @@ CONFIGURATION:
 }
 
 function showVersion() {
-  console.log(packageJson.version);
+  console.log(VERSION);
 }
 
 async function main() {
-  // Handle flags
   if (args.includes('--help') || args.includes('-h')) {
     showHelp();
     process.exit(0);
@@ -72,18 +63,15 @@ async function main() {
     process.exit(0);
   }
 
-  // Handle commands
   switch (command) {
     case 'start':
     case undefined:
-      // Default to starting the server
       await import('../src/index.js');
       break;
 
     case 'accounts': {
-      // Pass remaining args to accounts CLI
       const subCommand = args[1] || 'add';
-      process.argv = ['node', 'accounts-cli.js', subCommand, ...args.slice(2)];
+      process.argv = ['bun', 'accounts-cli.js', subCommand, ...args.slice(2)];
       await import('../src/cli/accounts.js');
       break;
     }

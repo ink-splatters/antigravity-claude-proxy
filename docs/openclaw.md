@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- OpenClaw installed (`npm install -g openclaw@latest`)
+- OpenClaw installed (`bun install -g openclaw@latest`)
 - Antigravity Claude Proxy running on port 8080
 - At least one Google account linked to the proxy
 

@@ -14,7 +14,7 @@
  *   not possible.
  *
  * USAGE:
- *   npm run accounts:add -- --no-browser
+ *   bun run accounts:add -- --no-browser
  *
  * USER FLOW:
  *   1. User runs command on headless server
@@ -42,7 +42,7 @@
  *
  * ============================================================================
  *
- * Run: node tests/test-oauth-no-browser.cjs
+ * Run: bun tests/test-oauth-no-browser.cjs
  */
 
 // Note: Using dynamic import because oauth.js is ESM

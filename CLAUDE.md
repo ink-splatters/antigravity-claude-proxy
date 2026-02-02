@@ -12,53 +12,53 @@ The proxy translates requests from Anthropic Messages API format → Google Gene
 
 ```bash
 # Install dependencies (automatically builds CSS via prepare hook)
-npm install
+bun install
 
 # Start server (runs on port 8080)
-npm start
+bun start
 
 # Start with specific account selection strategy
-npm start -- --strategy=sticky      # Cache-optimized (stays on same account)
-npm start -- --strategy=round-robin # Load-balanced (rotates every request)
-npm start -- --strategy=hybrid      # Smart distribution (default)
+bun start -- --strategy=sticky      # Cache-optimized (stays on same account)
+bun start -- --strategy=round-robin # Load-balanced (rotates every request)
+bun start -- --strategy=hybrid      # Smart distribution (default)
 
 # Start with model fallback enabled (falls back to alternate model when quota exhausted)
-npm start -- --fallback
+bun start -- --fallback
 
 # Start with debug logging
-npm start -- --debug
+bun start -- --debug
 
 # Development mode (file watching)
-npm run dev              # Watch server files only
-npm run dev:full         # Watch both CSS and server files (recommended for frontend dev)
+bun run dev              # Watch server files only
+bun run dev:full         # Watch both CSS and server files (recommended for frontend dev)
 
 # CSS build commands
-npm run build:css        # Build CSS once (minified)
-npm run watch:css        # Watch CSS files for changes
+bun run build:css        # Build CSS once (minified)
+bun run watch:css        # Watch CSS files for changes
 
 # Account management
-npm run accounts         # Interactive account management
-npm run accounts:add     # Add a new Google account via OAuth
-npm run accounts:add -- --no-browser  # Add account on headless server (manual code input)
-npm run accounts:list    # List configured accounts
-npm run accounts:verify  # Verify account tokens are valid
+bun run accounts         # Interactive account management
+bun run accounts:add     # Add a new Google account via OAuth
+bun run accounts:add -- --no-browser  # Add account on headless server (manual code input)
+bun run accounts:list    # List configured accounts
+bun run accounts:verify  # Verify account tokens are valid
 
 # Run all tests (server must be running on port 8080)
-npm test
+bun test
 
 # Run individual tests
-npm run test:signatures    # Thinking signatures
-npm run test:multiturn     # Multi-turn with tools
-npm run test:streaming     # Streaming SSE events
-npm run test:interleaved   # Interleaved thinking
-npm run test:images        # Image processing
-npm run test:caching       # Prompt caching
-npm run test:crossmodel    # Cross-model thinking signatures
-npm run test:oauth         # OAuth no-browser mode
-npm run test:cache-control # Cache control field stripping
+bun run test:signatures    # Thinking signatures
+bun run test:multiturn     # Multi-turn with tools
+bun run test:streaming     # Streaming SSE events
+bun run test:interleaved   # Interleaved thinking
+bun run test:images        # Image processing
+bun run test:caching       # Prompt caching
+bun run test:crossmodel    # Cross-model thinking signatures
+bun run test:oauth         # OAuth no-browser mode
+bun run test:cache-control # Cache control field stripping
 
 # Run strategy unit tests (no server required)
-node tests/test-strategies.cjs
+bun tests/test-strategies.cjs
 ```
 
 ## Architecture
@@ -131,8 +131,7 @@ src/
 │
 └── utils/                      # Utilities
     ├── helpers.js              # formatDuration, sleep, isNetworkError
-    ├── logger.js               # Structured logging
-    └── native-module-helper.js # Auto-rebuild for native modules
+    └── logger.js               # Structured logging
 ```
 
 **Frontend Structure (public/):**
@@ -183,7 +182,7 @@ public/
   - `model-api.js`: Model listing, quota retrieval (`getModelQuotas()`), and subscription tier detection (`getSubscriptionTier()`)
 - **src/account-manager/**: Multi-account pool with configurable selection strategies, rate limit handling, and automatic cooldown
   - Strategies: `sticky` (cache-optimized), `round-robin` (load-balanced), `hybrid` (smart distribution)
-- **src/auth/**: Authentication including Google OAuth, token extraction, database access, and auto-rebuild of native modules
+- **src/auth/**: Authentication including Google OAuth, token extraction and database access
 - **src/format/**: Format conversion between Anthropic and Google Generative AI formats
 - **src/config.js**: Runtime configuration with defaults (`globalQuotaThreshold`, `maxAccounts`, `accountSelection`, etc.)
 - **src/constants.js**: API endpoints, model mappings, fallback config, OAuth config, and all configuration values
@@ -262,7 +261,7 @@ Each account object in `accounts.json` contains:
 - Fallback mappings defined in `MODEL_FALLBACK_MAP` in `src/constants.js`
 - Thinking models fall back to thinking models (e.g., `claude-sonnet-4-5-thinking` → `gemini-3-flash`)
 - Fallback is disabled on recursive calls to prevent infinite chains
-- Enable with `npm start -- --fallback` or `FALLBACK=true` environment variable
+- Enable with `bun start -- --fallback` or `FALLBACK=true` environment variable
 
 **Cross-Model Thinking Signatures:**
 - Claude and Gemini use incompatible thinking signatures
@@ -281,13 +280,6 @@ Each account object in `accounts.json` contains:
 - Additional sanitizers (`sanitizeTextBlock`, `sanitizeToolUseBlock`) provide defense-in-depth
 - Pattern inspired by Antigravity-Manager's `clean_cache_control_from_messages()`
 
-**Native Module Auto-Rebuild:**
-- When Node.js is updated, native modules like `better-sqlite3` may become incompatible
-- The proxy automatically detects `NODE_MODULE_VERSION` mismatch errors
-- On detection, it attempts to rebuild the module using `npm rebuild`
-- If rebuild succeeds, the module is reloaded; if reload fails, a server restart is required
-- Implementation in `src/utils/native-module-helper.js` and lazy loading in `src/auth/database.js`
-
 **Web Management UI:**
 
 - **Stack**: Vanilla JS + Alpine.js + Tailwind CSS (local build with PostCSS)
@@ -296,7 +288,7 @@ Each account object in `accounts.json` contains:
   - PostCSS + Autoprefixer
   - DaisyUI component library
   - Custom `@apply` directives in `public/css/src/input.css`
-  - Compiled output: `public/css/style.css` (auto-generated on `npm install`)
+  - Compiled output: `public/css/style.css` (auto-generated on `bun install`)
 - **Architecture**: Single Page Application (SPA) with dynamic view loading
 - **State Management**:
   - Alpine.store for global state (accounts, settings, logs)
@@ -321,7 +313,7 @@ Each account object in `accounts.json` contains:
 
 ## Testing Notes
 
-- Tests require the server to be running (`npm start` in separate terminal)
+- Tests require the server to be running (`bun start` in separate terminal)
 - Tests are CommonJS files (`.cjs`) that make HTTP requests to the local proxy
 - Shared test utilities are in `tests/helpers/http-client.cjs`
 - Test runner supports filtering: `node tests/run-all.cjs <filter>` to run matching tests
@@ -388,7 +380,7 @@ Each account object in `accounts.json` contains:
 
 **Workflow:**
 1. Edit styles in `public/css/src/input.css` (Tailwind source with `@apply` directives)
-2. Run `npm run build:css` to compile (or `npm run watch:css` for auto-rebuild)
+2. Run `bun run build:css` to compile (or `bun run watch:css` for auto-rebuild)
 3. Compiled CSS output: `public/css/style.css` (minified, committed to git)
 
 **Component Styles:**
@@ -399,7 +391,7 @@ Each account object in `accounts.json` contains:
 **When to rebuild:**
 - After modifying `public/css/src/input.css`
 - After pulling changes that updated CSS source
-- Automatically on `npm install` (via `prepare` hook)
+- Automatically on `bun install` (via `prepare` hook)
 
 ### Error Handling Pattern
 

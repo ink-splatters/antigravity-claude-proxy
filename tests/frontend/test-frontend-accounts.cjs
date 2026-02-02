@@ -2,7 +2,7 @@
  * Frontend Test Suite - Accounts Page
  * Tests the account manager component functionality
  *
- * Run: node tests/test-frontend-accounts.cjs
+ * Run: bun tests/test-frontend-accounts.cjs
  */
 
 const http = require('http');

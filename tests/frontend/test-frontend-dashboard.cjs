@@ -2,7 +2,7 @@
  * Frontend Test Suite - Dashboard Page
  * Tests the dashboard component functionality
  *
- * Run: node tests/test-frontend-dashboard.cjs
+ * Run: bun tests/test-frontend-dashboard.cjs
  */
 
 const http = require('http');

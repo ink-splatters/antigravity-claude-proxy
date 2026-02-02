@@ -1,9 +1,9 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
  * Test Runner
  *
  * Runs all tests in sequence and reports results.
- * Usage: node tests/run-all.cjs
+ * Usage: bun tests/run-all.cjs
  */
 const { spawn } = require('child_process');
 const path = require('path');

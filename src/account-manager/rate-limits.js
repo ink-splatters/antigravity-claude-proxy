@@ -173,7 +173,7 @@ export function markInvalid(accounts, email, reason = 'Unknown error') {
         `[AccountManager]   Reason: ${reason}`
     );
     logger.error(
-        `[AccountManager]   Run 'npm run accounts' to re-authenticate this account`
+        `[AccountManager]   Run 'bun run accounts' to re-authenticate this account`
     );
 
     return true;

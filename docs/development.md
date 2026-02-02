@@ -9,8 +9,8 @@ This project uses a local Tailwind CSS build system. CSS is pre-compiled and inc
 ```bash
 git clone https://github.com/badri-s2001/antigravity-claude-proxy.git
 cd antigravity-claude-proxy
-npm install  # Automatically builds CSS via prepare hook
-npm start    # Start server (no rebuild needed)
+bun install  # Automatically builds CSS via prepare hook
+bun start    # Start server (no rebuild needed)
 ```
 
 ### Frontend Development
@@ -19,13 +19,13 @@ If you need to modify styles in `public/css/src/input.css`:
 
 ```bash
 # Option 1: Build once
-npm run build:css
+bun run build:css
 
 # Option 2: Watch for changes (auto-rebuild)
-npm run watch:css
+bun run watch:css
 
 # Option 3: Watch both CSS and server (recommended)
-npm run dev:full
+bun run dev:full
 ```
 
 **File Structure:**
@@ -39,8 +39,8 @@ npm run dev:full
 If you're only working on backend code and don't need frontend dev tools:
 
 ```bash
-npm install --production  # Skip devDependencies (saves ~20MB)
-npm start
+bun install --production  # Skip devDependencies (saves ~20MB)
+bun start
 ```
 
 **Note:** Pre-compiled CSS is committed to the repository, so you don't need to rebuild unless modifying styles.

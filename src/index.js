@@ -127,7 +127,7 @@ ${border}    ${align4(`export ANTHROPIC_API_KEY=${config.apiKey || 'dummy'}`)}${
 ║    claude                                                    ║
 ║                                                              ║
 ║  Add Google accounts:                                        ║
-║    npm run accounts                                          ║
+║    bun run accounts                                          ║
 ║                                                              ║
 ║  Prerequisites (if no accounts configured):                  ║
 ║    - Antigravity must be running                             ║

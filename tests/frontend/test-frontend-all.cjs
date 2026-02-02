@@ -1,8 +1,8 @@
 /**
  * Frontend Test Runner
  * Runs all frontend test suites
- * 
- * Run: node tests/frontend/test-frontend-all.cjs
+ *
+ * Run: bun tests/frontend/test-frontend-all.cjs
  */
 
 const { execSync, spawn } = require('child_process');
@@ -29,7 +29,7 @@ async function runTests() {
         console.log('─'.repeat(60));
 
         try {
-            const output = execSync(`node "${testPath}"`, {
+            const output = execSync(`bun "${testPath}"`, {
                 encoding: 'utf8',
                 stdio: ['pipe', 'pipe', 'pipe']
             });
