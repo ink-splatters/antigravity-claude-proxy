@@ -9,7 +9,7 @@
     inherit (config) src;
     packageJson = builtins.fromJSON (builtins.readFile "${src}/package.json");
   in {
-    packages.antigravity-claude-proxy = bun2nix.mkDerivation {
+    packages.antigravity-claude-proxy = bun2nix.writeBunApplication {
       pname = packageJson.name;
       inherit (packageJson) version;
 
@@ -19,7 +19,11 @@
         bunNix = "${src}/bun.nix";
       };
 
-      module = "${src}/bin/cli.js";
+      dontUseBunBuild = true;
+
+      startScript = ''
+        bun run bin/cli.js "$@"
+      '';
 
       meta = with lib; {
         description = "Proxy server to use Antigravity's Claude models with Claude Code CLI";
