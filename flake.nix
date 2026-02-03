@@ -4,7 +4,11 @@
   inputs = {
     bun2nix = {
       url = "github:nix-community/bun2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+      };
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
