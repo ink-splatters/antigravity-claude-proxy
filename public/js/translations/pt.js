@@ -119,6 +119,10 @@ window.translations.pt = {
     presetDescPlaceholder: "Descrição (opcional)",
     presetPreviewLabel: "Visualizar Config",
     presetPreviewHide: "Ocultar Visualização",
+    editPresetConfig: "Editar Config",
+    presetConfigSaved: "Configuração do preset atualizada",
+    failedToSavePresetConfig: "Falha ao atualizar configuração do preset",
+    presetConfigValidationError: "Corrija os erros de validação antes de salvar",
     // Settings - Server
     port: "Porta",
     uiVersion: "Versão da UI",

@@ -122,6 +122,10 @@ window.translations.tr = {
     presetDescPlaceholder: "Açıklama (isteğe bağlı)",
     presetPreviewLabel: "Yapılandırmayı Önizle",
     presetPreviewHide: "Önizlemeyi Gizle",
+    editPresetConfig: "Yapılandırmayı Düzenle",
+    presetConfigSaved: "Ön ayar yapılandırması güncellendi",
+    failedToSavePresetConfig: "Ön ayar yapılandırması güncellenemedi",
+    presetConfigValidationError: "Lütfen kaydetmeden önce doğrulama hatalarını düzeltin",
     // Settings - Server
     port: "Port",
     uiVersion: "Arayüz Sürümü",

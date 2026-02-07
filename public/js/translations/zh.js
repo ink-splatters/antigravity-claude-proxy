@@ -140,6 +140,10 @@ window.translations.zh = {
     presetDescPlaceholder: "描述（可选）",
     presetPreviewLabel: "预览配置",
     presetPreviewHide: "隐藏预览",
+    editPresetConfig: "编辑配置",
+    presetConfigSaved: "预设配置已更新",
+    failedToSavePresetConfig: "更新预设配置失败",
+    presetConfigValidationError: "请先修复验证错误再保存",
     // Settings - Server
     port: "端口",
     uiVersion: "UI 版本",

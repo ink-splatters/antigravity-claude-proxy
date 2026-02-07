@@ -161,6 +161,10 @@ window.translations.id = {
     presetDescPlaceholder: "Deskripsi (opsional)",
     presetPreviewLabel: "Pratinjau Konfigurasi",
     presetPreviewHide: "Sembunyikan Pratinjau",
+    editPresetConfig: "Edit Konfigurasi",
+    presetConfigSaved: "Konfigurasi preset diperbarui",
+    failedToSavePresetConfig: "Gagal memperbarui konfigurasi preset",
+    presetConfigValidationError: "Perbaiki kesalahan validasi sebelum menyimpan",
 
     // Settings - Server
     port: "Port",

@@ -140,6 +140,10 @@ window.translations.en = {
     presetDescPlaceholder: "Description (optional)",
     presetPreviewLabel: "Preview Config",
     presetPreviewHide: "Hide Preview",
+    editPresetConfig: "Edit Config",
+    presetConfigSaved: "Preset config updated",
+    failedToSavePresetConfig: "Failed to update preset config",
+    presetConfigValidationError: "Please fix validation errors before saving",
     // Settings - Server
     port: "Port",
     uiVersion: "UI Version",
