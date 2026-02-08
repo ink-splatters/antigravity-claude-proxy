@@ -778,13 +778,7 @@ async function runTests() {
         const tokenTracker = strategy.getTokenBucketTracker();
 
         assertEqual(healthTracker.getScore(accounts[0].email), 50, 'Health should decrease by 20');
-
-        // Use approximate comparison for tokens since regeneration happens continuously
-        const currentTokens = tokenTracker.getTokens(accounts[0].email);
-        const expectedTokens = tokensBefore + 1;
-        if (Math.abs(currentTokens - expectedTokens) > 0.01) {
-             throw new Error(`Token should be refunded\nExpected: ~${expectedTokens}\nActual: ${currentTokens}`);
-        }
+        assertEqual(tokenTracker.getTokens(accounts[0].email), tokensBefore + 1, 'Token should be refunded');
     });
 
     test('HybridStrategy: scoring formula weights work correctly', () => {
