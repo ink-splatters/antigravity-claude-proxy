@@ -3,10 +3,9 @@
  * Test Runner
  *
  * Runs all tests in sequence and reports results.
- * Usage: bun tests/run-all.cjs
+ * Usage: bun tests/run-all.js
  */
-const { spawn } = require('child_process');
-const path = require('path');
+import path from 'node:path';
 
 const tests = [
     { name: 'Account Selection Strategies', file: 'test-strategies.cjs' },
@@ -25,21 +24,17 @@ const tests = [
 ];
 
 async function runTest(test) {
-    return new Promise((resolve) => {
-        const testPath = path.join(__dirname, test.file);
-        const child = spawn('node', [testPath], {
-            stdio: 'inherit'
-        });
+    const testPath = path.join(import.meta.dir, test.file);
 
-        child.on('close', (code) => {
-            resolve({ ...test, passed: code === 0 });
-        });
-
-        child.on('error', (err) => {
-            console.error(`Error running ${test.name}:`, err);
-            resolve({ ...test, passed: false });
-        });
+    // Use Bun.spawn for native performance
+    const proc = Bun.spawn(['bun', testPath], {
+        stdin: 'inherit',
+        stdout: 'inherit',
+        stderr: 'inherit',
     });
+
+    const exitCode = await proc.exited;
+    return { ...test, passed: exitCode === 0 };
 }
 
 async function main() {
@@ -89,7 +84,6 @@ async function main() {
     let allPassed = true;
     for (const result of results) {
         const status = result.passed ? '✓ PASS' : '✗ FAIL';
-        const statusColor = result.passed ? '' : '';
         console.log(`║ ${status.padEnd(8)} ${result.name.padEnd(50)} ║`);
         if (!result.passed) allPassed = false;
     }

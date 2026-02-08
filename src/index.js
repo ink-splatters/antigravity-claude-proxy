@@ -67,8 +67,8 @@ const CONFIG_DIR = path.join(HOME_DIR, '.antigravity-claude-proxy');
 const server = app.listen(PORT, HOST, () => {
     // Get actual bound address
     const address = server.address();
-    const boundHost = typeof address === 'string' ? address : address.address;
-    const boundPort = typeof address === 'string' ? null : address.port;
+    const boundHost = address ? (typeof address === 'string' ? address : address.address) : HOST;
+    const boundPort = address ? (typeof address === 'string' ? null : address.port) : PORT;
 
     // Clear console for a clean start
     console.clear();

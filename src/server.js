@@ -897,7 +897,7 @@ app.post('/v1/messages', async (req, res) => {
  */
 usageStats.setupRoutes(app);
 
-app.use('*', (req, res) => {
+app.use((req, res) => {
     // Log 404s (use originalUrl since wildcard strips req.path)
     if (logger.isDebugEnabled) {
         logger.debug(`[API] 404 Not Found: ${req.method} ${req.originalUrl}`);

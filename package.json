@@ -24,7 +24,7 @@
     "accounts:list": "bun src/cli/accounts.js list",
     "accounts:remove": "bun src/cli/accounts.js remove",
     "accounts:verify": "bun src/cli/accounts.js verify",
-    "test": "bun tests/run-all.cjs",
+    "test": "bun tests/run-all.js",
     "test:signatures": "bun tests/test-thinking-signatures.cjs",
     "test:multiturn": "bun tests/test-multiturn-thinking-tools.cjs",
     "test:streaming": "bun tests/test-multiturn-thinking-tools-streaming.cjs",
