@@ -7,10 +7,13 @@ function isObject(item) {
     return (item && typeof item === 'object' && !Array.isArray(item));
 }
 
+const DENIED_KEYS = ['__proto__', 'constructor', 'prototype'];
+
 function deepMerge(target, source) {
     const output = { ...target };
     if (isObject(target) && isObject(source)) {
         Object.keys(source).forEach(key => {
+            if (DENIED_KEYS.includes(key)) return;
             if (isObject(source[key])) {
                 if (!(key in target)) {
                     Object.assign(output, { [key]: source[key] });
