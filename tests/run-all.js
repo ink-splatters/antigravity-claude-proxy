@@ -9,6 +9,7 @@ import path from 'node:path';
 
 const tests = [
     { name: 'Account Selection Strategies', file: 'test-strategies.cjs' },
+    { name: 'Fingerprint Management', file: 'test-fingerprint.cjs' },
     { name: 'Cache Control Stripping', file: 'test-cache-control.cjs' },
     { name: 'Thinking Signatures', file: 'test-thinking-signatures.cjs' },
     { name: 'Multi-turn Tools (Non-Streaming)', file: 'test-multiturn-thinking-tools.cjs' },
