@@ -6,7 +6,6 @@
 # or `pkgs.callPackage` if you wish to handle
 # it manually.
 {
-  # TODO: add `bun.nix` to deadnix' ignore instead of modifying it here
   # copyPathToStore,
   # fetchFromGitHub,
   # fetchgit,
@@ -708,6 +707,10 @@
   "type-is@1.6.18" = fetchurl {
     url = "https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz";
     hash = "sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==";
+  };
+  "undici@7.21.0" = fetchurl {
+    url = "https://registry.npmjs.org/undici/-/undici-7.21.0.tgz";
+    hash = "sha512-Hn2tCQpoDt1wv23a68Ctc8Cr/BHpUSfaPYrkajTXOS9IKpxVRx/X5m1K2YkbK2ipgZgxXSgsUinl3x+2YdSSfg==";
   };
   "unpipe@1.0.0" = fetchurl {
     url = "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz";
