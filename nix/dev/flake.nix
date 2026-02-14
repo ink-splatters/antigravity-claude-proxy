@@ -9,7 +9,7 @@
     };
 
     # we pinned nixpkgs before recent breakage which is not fixed yet
-    nixpkgs.url = "github:NixOS/nixpkgs/70801e06d9730c4f1704fbd3bbf5b8e11c03a2a7";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
   nixConfig = {
