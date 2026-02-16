@@ -6,6 +6,7 @@
 import { homedir, platform, arch } from 'os';
 import { join } from 'path';
 import { config } from './config.js';
+import { generateSmartUserAgent } from './utils/version-detector.js';
 
 /**
  * Get the Antigravity database path based on the current platform.
@@ -31,9 +32,7 @@ function getAntigravityDbPath() {
  * @returns {string} User-Agent in format "antigravity/version os/arch"
  */
 export function getPlatformUserAgent() {
-    const os = platform();
-    const architecture = arch();
-    return `antigravity/1.16.5 ${os}/${architecture}`;
+    return generateSmartUserAgent();
 }
 
 // IDE Type enum (numeric values as expected by Cloud Code API)
