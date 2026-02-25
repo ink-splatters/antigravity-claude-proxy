@@ -290,7 +290,7 @@ When running as a systemd service, the proxy runs under a different user (e.g. `
 # /etc/systemd/system/antigravity-proxy.service
 [Service]
 Environment=CLAUDE_CONFIG_PATH=/home/youruser/.claude
-ExecStart=/usr/bin/node /path/to/antigravity-claude-proxy/src/index.js
+ExecStart=/usr/bin/bun /path/to/antigravity-claude-proxy/src/index.js
 ```
 
 Without this, the WebUI's Claude CLI tab won't be able to read or write your Claude Code configuration.
