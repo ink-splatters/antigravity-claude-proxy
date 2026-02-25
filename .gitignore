@@ -33,10 +33,3 @@ tests/utils/*.jpeg
 # Build output
 dist/
 build/
-
-# direnv
-/.direnv
-
-# nix build
-/result
-/.pre-commit-config.yaml
